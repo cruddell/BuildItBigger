@@ -1,0 +1,67 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha3'
+    }
+}
+
+//the tasks below are used in runAppEngineAndTest task as easy references to subproject tasks:
+task runUnitTest(type: GradleBuild) {
+    //run the test only on the Paid Debug build to ignore ads and to only use development server
+    tasks = [':app:connectedAndroidTestPaidDebug']
+}
+
+task shutdownServerPreLaunch(type: GradleBuild) {
+    //shuts down the server - do this at the beginning and the end
+    tasks = [":backend:appengineStop"]
+}
+
+task shutdownServerPostLaunch(type: GradleBuild) {
+    //shuts down the server - do this at the beginning and the end
+    tasks = [":backend:appengineStop"]
+}
+
+
+task startAppEngineAndTest(type: GradleBuild) {
+    dependsOn ":backend:appengineRun"
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+}
+
+
+/**
+ * Primary Task to run JUnit tests for Udacity Nanodegree Program:
+ *
+ * Run this task to launch the development App Engine server, run the unit tests, and shut it down again
+ * To run on OSX/Linux:
+ * 1) Open terminal to the project folder (can use "terminal" tab at bottom of Android Studio)
+ * 2) set APPENGINE_HOME system variable by typing: export APPENGINE_HOME=~/.gradle/appengine-sdk
+ * 3) run tests by typing: ./gradlew runAppEngineAndTest --stacktrace
+ */
+task runAppEngineAndTest(type: GradleBuild) {
+    tasks = ["shutdownServerPreLaunch","startAppEngineAndTest","runUnitTest","shutdownServerPostLaunch"]
+
+    startAppEngineAndTest.mustRunAfter shutdownServerPreLaunch
+    runUnitTest.mustRunAfter startAppEngineAndTest
+    shutdownServerPostLaunch.mustRunAfter runUnitTest
+
+}
+
+
+
+
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = "1.7"
+        targetCompatibility = "1.7"
+    }
+}
