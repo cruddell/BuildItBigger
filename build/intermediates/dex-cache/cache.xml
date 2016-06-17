@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="false"
         revision="23.0.1"
-        sha1="9bc66965a2db1366b3a12140467c0057c538bd97">
+        sha1="107e822b63c6e3ee7359e13b9e39573aad578b1c">
         <dex dex="/Users/chris1/Documents/GIT/udacity/AndroidNanodegree/BuildItBigger/app/build/intermediates/transforms/dex/free/debug/folders/1000/10/instant-run_d7dc8c46ffb55022ec70ffe83d64e9e85b4debb6/classes.dex" />
     </item>
     <item
@@ -295,7 +295,7 @@
         jumboMode="true"
         optimize="false"
         revision="23.0.1"
-        sha1="107207ebbda6eca7e1f0ac663ef242af233d19a9">
+        sha1="9e62f3c0b0d5ce0b8e6d6d09521030ded2dad53d">
         <dex dex="/Users/chris1/Documents/GIT/udacity/AndroidNanodegree/BuildItBigger/app/build/intermediates/transforms/dex/free/debug/folders/1000/10/instant-run-bootstrap_8abf97db3f44288602d4b500b327ebd303d3ecac/classes.dex" />
     </item>
     <item
